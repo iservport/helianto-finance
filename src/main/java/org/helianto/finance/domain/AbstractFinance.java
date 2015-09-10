@@ -1,6 +1,7 @@
 package org.helianto.finance.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -11,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
@@ -56,6 +59,9 @@ public abstract class AbstractFinance
 	@Transient
 	private Integer privateEntityId;
 	
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date checkOutDate = null;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -89,7 +95,7 @@ public abstract class AbstractFinance
 	
 	public String getEntityAlias() {
 		if (getPrivateEntity()!=null) {
-			return getEntityAlias();
+			return getPrivateEntity().getEntityAlias();
 		}
 		return "";
 	}
@@ -129,6 +135,18 @@ public abstract class AbstractFinance
 	}
 	public void setPrivateEntityId(Integer privateEntityId) {
 		this.privateEntityId = privateEntityId;
+	}
+	
+	/**
+	 * Date which Resolution change to D(Done)
+	 * i.e, paid({@link Payable}) or received({@link Receivable}). 
+	 * Default it's null.
+	 */
+	public Date getCheckOutDate() {
+		return checkOutDate;
+	}
+	public void setCheckOutDate(Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
 	}
 
 	@Override
