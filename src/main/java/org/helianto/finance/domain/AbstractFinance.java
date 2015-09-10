@@ -11,6 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.helianto.core.domain.Entity;
@@ -52,6 +53,9 @@ public abstract class AbstractFinance
 	
 	private BigDecimal faceValue;
 	
+	@Transient
+	private Integer privateEntityId;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -69,6 +73,18 @@ public abstract class AbstractFinance
 		this();
 		setEntity(entity);
 		setInternalNumber(internalNumber);
+	}
+	
+    /**
+     * Constructor.
+     * 
+     * @param entity
+     * @param privateEntity
+     * @param internalNumber
+     */
+    public AbstractFinance(Entity entity, PrivateEntity privateEntity, long internalNumber) {
+		this(entity,internalNumber);
+		setPrivateEntity(privateEntity);
 	}
 	
 	public String getEntityAlias() {
@@ -103,6 +119,16 @@ public abstract class AbstractFinance
 	}
 	public void setFaceValue(BigDecimal faceValue) {
 		this.faceValue = faceValue;
+	}
+	
+	/**
+	 * Transient privateEntityId.
+	 */
+	public Integer getPrivateEntityId() {
+		return privateEntityId;
+	}
+	public void setPrivateEntityId(Integer privateEntityId) {
+		this.privateEntityId = privateEntityId;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package org.helianto.finance.domain;
 import javax.persistence.DiscriminatorValue;
 
 import org.helianto.core.domain.Entity;
+import org.helianto.partner.domain.PrivateEntity;
 
 /**
  * Payables.
@@ -32,6 +33,18 @@ public class Payable extends AbstractFinance {
 		this();
 		setEntity(entity);
 		setInternalNumber(internalNumber);
+	}
+    
+    /**
+     * Constructor.
+     * 
+     * @param entity
+     * @param privateEntity
+     * @param internalNumber
+     */
+    public Payable(Entity entity, PrivateEntity privateEntity, long internalNumber) {
+		this(entity,internalNumber);
+		setPrivateEntity(privateEntity);
 	}
     
     public int getStartNumber() {
