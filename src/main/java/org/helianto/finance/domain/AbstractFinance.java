@@ -60,7 +60,7 @@ public abstract class AbstractFinance
 	private Integer privateEntityId;
 	
     @Temporal(TemporalType.TIMESTAMP)
-    private Date checkOutDate = null;
+    private Date paymentDate = null;
 	
 	/**
 	 * Default constructor.
@@ -142,12 +142,13 @@ public abstract class AbstractFinance
 	 * i.e, paid({@link Payable}) or received({@link Receivable}). 
 	 * Default it's null.
 	 */
-	public Date getCheckOutDate() {
-		return checkOutDate;
+	public Date getPaymentDate() {
+		return paymentDate;
 	}
-	public void setCheckOutDate(Date checkOutDate) {
-		this.checkOutDate = checkOutDate;
+	public void setPaymentDate(Date paymentDate) {
+		this.paymentDate = paymentDate;
 	}
+	
 
 	@Override
 	public int hashCode() {
