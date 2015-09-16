@@ -23,6 +23,7 @@ import org.helianto.core.number.Sequenceable;
 import org.helianto.partner.domain.PrivateEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Finance base class.
@@ -149,6 +150,11 @@ public abstract class AbstractFinance
 		this.paymentDate = paymentDate;
 	}
 	
+	@JsonSerialize
+	@Override
+	public Character getResolution() {
+		return super.getResolution();
+	}
 
 	@Override
 	public int hashCode() {
