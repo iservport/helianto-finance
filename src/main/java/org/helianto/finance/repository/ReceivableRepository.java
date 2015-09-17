@@ -380,4 +380,18 @@ public interface ReceivableRepository extends JpaRepository<Receivable, Serializ
 	 */
 	List<Receivable> findByPrivateEntity_IdAndResolutionInAndPaymentDateAfter(Integer privateEntityId, Set<Character> resolutions, Date start);
 
+	Receivable findByTransactionCode(String transactionCode);
+	
+	/**
+	 * Last internalNumber.
+	 * 
+	 * @param entityId
+	 */
+	@Query("select max(fin.internalNumber) "
+			+ "from Receivable fin "
+			+ "where fin.entity.id = ?1 ")
+	Long findLastInternalNumber(int entityId);
+	
+	List<Receivable> findByReference(String reference);
+	
 }

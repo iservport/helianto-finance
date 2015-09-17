@@ -57,6 +57,17 @@ public abstract class AbstractFinance
 	
 	private BigDecimal faceValue;
 	
+	/**
+	 * UUID code reference.
+	 */
+	private String reference;
+	
+	/**
+	 * Code of transaction on payment API. 
+	 */
+	@Column(unique=true)
+	private String transactionCode;
+	
 	@Transient
 	private Integer privateEntityId;
 	
@@ -154,6 +165,20 @@ public abstract class AbstractFinance
 	@Override
 	public Character getResolution() {
 		return super.getResolution();
+	}
+	
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+	
+	public String getTransactionCode() {
+		return transactionCode;
+	}
+	public void setTransactionCode(String transactionCode) {
+		this.transactionCode = transactionCode;
 	}
 
 	@Override

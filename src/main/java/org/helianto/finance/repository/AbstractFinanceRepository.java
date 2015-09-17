@@ -380,4 +380,17 @@ public interface AbstractFinanceRepository extends JpaRepository<AbstractFinance
 	 */
 	List<AbstractFinance> findByPrivateEntity_IdAndResolutionInAndPaymentDateAfter(Integer privateEntityId, Set<Character> resolutions, Date start);
 
+	AbstractFinance findByTransactionCode(String transactionCode);
+	
+	/**
+	 * Last internalNumber.
+	 * 
+	 * @param entityId
+	 */
+	@Query("select max(fin.internalNumber) "
+			+ "from AbstractFinance fin "
+			+ "where fin.entity.id = ?1 ")
+	Long findLastInternalNumber(int entityId);
+	
+	List<AbstractFinance> findByReference(String reference);
 }
