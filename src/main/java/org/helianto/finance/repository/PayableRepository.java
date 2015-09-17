@@ -380,5 +380,18 @@ public interface PayableRepository extends JpaRepository<Payable, Serializable> 
 	 */
 	List<Payable> findByPrivateEntity_IdAndResolutionInAndPaymentDateAfter(Integer privateEntityId, Set<Character> resolutions, Date start);
 
+	Payable findByTransactionCode(String transactionCode);
+	
+	/**
+	 * Last internalNumber.
+	 * 
+	 * @param entityId
+	 */
+	@Query("select max(fin.internalNumber) "
+			+ "from Payable fin "
+			+ "where fin.entity.id = ?1 ")
+	Long findLastInternalNumber(int entityId);
+	
+	List<Payable> findByReference(String reference);
 	
 }
